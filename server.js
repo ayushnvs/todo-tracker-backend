@@ -22,7 +22,7 @@ const tasksRouter = require('./routes/tasks')
 const userRouter = require('./routes/user')
 
 app.use('/tasks', tasksRouter)
-app.use('/user', userRouter)
+app.use('/users', userRouter)
 
 app.listen(port, () => {
     console.log(`Serer is running on port ${port}.`)
