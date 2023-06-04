@@ -54,28 +54,20 @@ router.route('/update/:id').post((req, res) => {
         })
 })
 
-// Add Updates
-router.route('/update/updates/:id').post((req, res) => {
+// Update Data
+router.route('/update/:data/:id').post((req, res) => {
     Task.findById(req.params.id)
         .then(task => {
-            if (req.body.updates !== '') task.updates.push(req.body.updates)
+            if (req.params.data == 'updates') {
+                if (req.body.updates !== '') task.updates.push(req.body.updates)
+            }
+            else task[req.params.data] = req.body[req.params.data]
 
             task.save()
-                .then(() => res.json('Updates Added!!'))
+                .then(() => res.json(`${req.params.data.toUpperCase()} Updated!`))
                 .catch(err => res.status(400).json('Error: ' + err))
         })
-})
-
-// Update Status
-router.route('/update/status/:id').post((req, res) => {
-    Task.findById(req.params.id)
-        .then(task => {
-            task.status = req.body.status
-
-            task.save()
-                .then(() => res.json('Status Updated!'))
-                .catch(err => res.status(400).json('Error: ' + err))
-        })
+        .catch(err => res.status(400).json('Error: ' + err))
 })
 
 module.exports = router
