@@ -20,10 +20,12 @@ connection.once('open', () => {
 
 const tasksRouter = require('./routes/tasks')
 const userRouter = require('./routes/user')
+const columnFilterRouter = require('./routes/settings')
 
 app.use('/tasks', tasksRouter)
 app.use('/users', userRouter)
+app.use('/settings/filter', columnFilterRouter)
 
 app.listen(port, () => {
-    console.log(`Serer is running on port ${port}.`)
+    console.log(`Server is running on port ${port}.`)
 })

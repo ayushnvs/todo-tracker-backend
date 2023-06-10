@@ -41,7 +41,6 @@ router.route('/update/:id').post((req, res) => {
         .then(task => {
             task.name = req.body.name
             task.description = req.body.description
-            // console.log(req.body.updates, req.body.description)
             if (req.body.updates !== '') task.updates.push(req.body.updates)
             task.category = req.body.category
             task.username = req.body.username
